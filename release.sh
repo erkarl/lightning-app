@@ -19,6 +19,11 @@ if [ $# -ne 1 ]; then
 fi
 RELEASE=$1
 
+# replaces version
+sed -i '' 's/\(.*"version": "\)\(.*\)\(".*\)/\1'$RELEASE'\3/' ${PACKAGE}
+# commits new version
+git commit -am "$RELEASE"
+
 # fetch all current tags
 git fetch --tags
 
