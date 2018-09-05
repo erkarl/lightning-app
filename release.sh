@@ -10,7 +10,7 @@ fi
 
 TEMP_DATA_JSON="release.json"
 PACKAGE="package.json"
-GITHUB_API_ENDPOINT="https://api.github.com/repos/lightninglabs/lightning-app/releases"
+GITHUB_API_ENDPOINT="https://api.github.com/repos/erkarl/lightning-app/releases"
 
 if [ $# -ne 1 ]; then
     echo You must provide only a release version!
