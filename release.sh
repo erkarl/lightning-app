@@ -10,7 +10,7 @@ fi
 
 TEMP_DATA_JSON="release.json"
 PACKAGE="package.json"
-GITHUB_API_ENDPOINT="https://api.github.com/repos/lightninglabs/lightning-app/releases"
+GITHUB_API_ENDPOINT="https://api.github.com/repos/erkarl/lightning-app/releases"
 
 if [ $# -ne 1 ]; then
     echo You must provide only a release version!
@@ -18,6 +18,11 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 RELEASE=$1
+
+# replaces version
+sed -i '' 's/\(.*"version": "\)\(.*\)\(".*\)/\1'$RELEASE'\3/' ${PACKAGE}
+# commits new version
+git commit -am "$RELEASE"
 
 # fetch all current tags
 git fetch --tags
