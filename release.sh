@@ -22,8 +22,8 @@ RELEASE=$1
 # fetch all current tags
 git fetch --tags
 
-# generate boilerplate release notes from commits
-RELEASE_NOTES="$(git log $(git describe --tags --abbrev=0)..HEAD --pretty='* %s (%h)\n')"
+# generate boilerplate release notes from merged PR messages
+RELEASE_NOTES="$(git log $(git describe --tags --abbrev=0)..HEAD --merges --pretty='* %b [%h](http://github.com/lightninglabs/lightning-app/commit/%H)\n')"
 
 # ensure temp file is empty
 rm -f ${TEMP_DATA_JSON}
