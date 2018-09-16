@@ -30,7 +30,7 @@ class PaymentAction {
    */
   listenForUrl(ipc) {
     ipc.listen('open-url', async (event, url) => {
-      log.info('open-url', url);
+      log.info('open-url listenForUrl', url);
       if (!isLnUri(url)) {
         return;
       }

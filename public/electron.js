@@ -203,13 +203,27 @@ app.on('quit', () => {
   btcdProcess && btcdProcess.kill('SIGINT');
 });
 
+const duplicateInstance = app.makeSingleInstance(args => {
+  if (process.platform == 'win32') {
+    const protocolUrl = args.slice(1)[0];
+    onOpenUrl(null, protocolUrl);
+  }
+  if (win) {
+    if (win.isMinimized()) win.restore();
+    win.focus();
+  }
+});
+
 app.setAsDefaultProtocolClient(PREFIX_NAME);
-app.on('open-url', async (event, url) => {
+const onOpenUrl = async (event, url) => {
   while (!win) {
     await new Promise(resolve => setTimeout(resolve, LND_INIT_DELAY));
   }
   win && win.webContents.send('open-url', url);
-});
+};
+app.on('open-url', onOpenUrl);
+
+if (duplicateInstance) app.quit();
 
 process.on('uncaughtException', error => {
   Logger.error('Caught Main Process Error:', error);
