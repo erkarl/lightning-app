@@ -136,6 +136,17 @@ storiesOf('Screens', module)
     <Channel store={{ computedChannels: [] }} channel={channel} nav={nav} />
   ))
   .add('Channel Details', () => <ChannelDetail store={store} nav={nav} />)
+  .add('Channel Details (Closing)', () => (
+    <ChannelDetail
+      store={{
+        ...store,
+        selectedChannel: store.pendingChannels.find(
+          c => c.status === 'pending-closing'
+        ),
+      }}
+      nav={nav}
+    />
+  ))
   .add('Channel Delete', () => (
     <ChannelDelete store={store} channel={channel} nav={nav} />
   ))
