@@ -36,7 +36,7 @@ const ChannelForceDeleteView = ({ nav, channel }) => (
       </FormStretcher>
       <PillButton
         style={styles.deleteBtn}
-        onPress={() => channel.closeSelectedChannel()}
+        onPress={() => channel.closeSelectedChannel(true)}
       >
         Force close this channel
       </PillButton>

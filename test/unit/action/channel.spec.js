@@ -274,6 +274,15 @@ describe('Action Channels Unit Tests', () => {
       });
     });
 
+    it('should force close open channel and navigate to channels view', async () => {
+      await channel.closeSelectedChannel(true);
+      expect(nav.goChannels, 'was called once');
+      expect(channel.closeChannel, 'was called with', {
+        channelPoint: 'some-channel-point',
+        force: true,
+      });
+    });
+
     it('should navigate to force delete channel view in case of channel link error', async () => {
       channel.closeChannel.rejects({
         code: 2,
