@@ -27,6 +27,7 @@ import TransactionDetail from '../src/view/transaction-detail';
 import Channel from '../src/view/channel';
 import ChannelDetail from '../src/view/channel-detail';
 import ChannelDelete from '../src/view/channel-delete';
+import ChannelForceDelete from '../src/view/channel-force-delete';
 import ChannelCreate from '../src/view/channel-create';
 import Home from '../src/view/home';
 import Deposit from '../src/view/deposit';
@@ -137,6 +138,9 @@ storiesOf('Screens', module)
   .add('Channel Details', () => <ChannelDetail store={store} nav={nav} />)
   .add('Channel Delete', () => (
     <ChannelDelete store={store} channel={channel} nav={nav} />
+  ))
+  .add('Channel Force Delete', () => (
+    <ChannelForceDelete store={store} channel={channel} nav={nav} />
   ))
   .add('Channel Create', () => (
     <ChannelCreate store={store} channel={channel} nav={nav} />
