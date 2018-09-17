@@ -265,7 +265,15 @@ class ChannelAction {
       this._nav.goChannels();
       await this.closeChannel({ channelPoint: selectedChannel.channelPoint });
     } catch (err) {
-      this._notification.display({ msg: 'Closing channel failed!', err });
+      if (
+        err &&
+        err.details &&
+        err.details.includes('try force closing it instead')
+      ) {
+        this._nav.goChannelForceDelete();
+      } else {
+        this._notification.display({ msg: 'Closing channel failed!', err });
+      }
     }
   }
 
