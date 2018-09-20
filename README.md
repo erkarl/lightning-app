@@ -23,8 +23,12 @@ See the `ToDo (next release)` column on our [project board](https://github.com/l
 
 ### Developing Locally
 
-You'll need to build `lnd` and `btcd` locally using the [installation guide](http://dev.lightning.community/guides/installation/). Then start by cloning this git repo and go inside the project folder to run the following commands:
+You'll need to build `lnd` and `btcd` locally using the [installation guide](http://dev.lightning.community/guides/installation/). In addition, lnd needs to be built with experimental flag enabled: `make && make install tags=experimental`.
+
+Then start by cloning this git repo and go inside the project folder to run the following commands:
 ```
+cp $GOPATH/bin/lnd ./assets/bin/darwin
+
 npm install
 
 npm test
