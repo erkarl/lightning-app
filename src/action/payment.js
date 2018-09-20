@@ -87,7 +87,11 @@ class PaymentAction {
       return this._notification.display({ msg: 'Enter an invoice or address' });
     }
     if (await this.decodeInvoice({ invoice: this._store.payment.address })) {
-      this._nav.goPayLightningConfirm();
+      this._store.syncedToChain
+        ? this._nav.goPayLightningConfirm()
+        : this._notification.display({
+            msg: 'Unable to make Lightning payment when syncing to chain',
+          });
     } else if (isAddress(this._store.payment.address)) {
       this._nav.goPayBitcoin();
     } else {

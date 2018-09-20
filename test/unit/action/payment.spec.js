@@ -114,10 +114,20 @@ describe('Action Payments Unit Tests', () => {
     });
 
     it('should decode successfully', async () => {
+      store.syncedToChain = true;
       store.payment.address = 'some-address';
       payment.decodeInvoice.resolves(true);
       await payment.checkType();
       expect(nav.goPayLightningConfirm, 'was called once');
+    });
+
+    it('should notify if not synced to chain', async () => {
+      store.syncedToChain = false;
+      store.payment.address = 'some-address';
+      payment.decodeInvoice.resolves(true);
+      await payment.checkType();
+      expect(notification.display, 'was called once');
+      expect(nav.goPayLightningConfirm, 'was not called');
     });
 
     it('should notify if not bitcoin address', async () => {
